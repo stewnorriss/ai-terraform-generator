@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Language to Terraform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗️ AI Terraform Generator</h1>
+            <p>Transform natural language into production-ready infrastructure code</p>
+            <p style="font-size: 0.9rem; opacity: 0.8;">🤖 Powered by Advanced AI Pattern Recognition + Your AWS Account
+            </p>
+            <div id="awsStatus" class="aws-status">
+                <span style="color: #666;">🔄 Checking AWS connection...</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <label for="naturalLanguageInput" class="input-label">
+                    Describe Your Infrastructure
+                </label>
+                <textarea id="naturalLanguageInput" placeholder="Describe your infrastructure in plain English...
+
+Examples:
+• Create a scalable web application with load balancer and database
+• Set up a secure data pipeline with Lambda and DynamoDB  
+• Build a static website with global CDN distribution
+• Deploy a microservices architecture with container orchestration" rows="6"></textarea>
+
+                <div class="quick-templates">
+                    <h4>🚀 Quick Templates</h4>
+                    <div class="template-buttons">
+                        <button class="template-btn" onclick="useTemplate('static-website')">
+                            🌐 Static Website
+                        </button>
+                        <button class="template-btn" onclick="useTemplate('web-app')">
+                            💻 Web Application
+                        </button>
+                        <button class="template-btn" onclick="useTemplate('database')">
+                            🗄️ Database Setup
+                        </button>
+                        <button class="template-btn" onclick="useTemplate('serverless')">
+                            ⚡ Serverless API
+                        </button>
+                        <button class="template-btn" onclick="useTemplate('vpc-network')">
+                            🔒 VPC Network
+                        </button>
+                        <button class="template-btn" onclick="useTemplate('load-balancer')">
+                            ⚖️ Load Balancer
+                        </button>
+                        <button class="template-btn" onclick="useTemplate('container')">
+                            📦 Container App
+                        </button>
+                        <button class="template-btn" onclick="useTemplate('data-pipeline')">
+                            🔄 Data Pipeline
+                        </button>
+                    </div>
+                </div>
+
+                <button id="generateBtn" onclick="generateTerraform()">
+                    <span>🚀</span>
+                    Generate Infrastructure
+                </button>
+            </div>
+
+            <div class="output-section" id="outputSection" style="display: none;">
+                <div class="explanation">
+                    <h3>📋 Infrastructure Overview</h3>
+                    <div id="explanation"></div>
+                </div>
+
+                <div class="terraform-code">
+                    <h3>⚡ Generated Infrastructure Code</h3>
+                    <div id="terraformCode" class="code-block"></div>
+                    <div class="code-actions">
+                        <button id="copyBtn" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                        <button id="downloadBtn" onclick="downloadTerraform()">💾 Download main.tf</button>
+                        <button id="docsBtn" onclick="toggleDocumentation()">📚 Show Documentation</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="documentation-section" id="documentationSection" style="display: none;">
+                <div class="docs-container">
+                    <h3>📚 Complete Infrastructure Documentation</h3>
+                    <div id="documentationContent"></div>
+                </div>
+            </div>
+
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>🤖 AI is analyzing your requirements...</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize AWS connection check on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            configureAWS();
+        });
+    </script>
+</body>
+
+</html>

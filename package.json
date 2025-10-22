@@ -1,0 +1,39 @@
+{
+  "name": "ai-terraform-generator",
+  "version": "2.0.0",
+  "description": "Professional AI-powered Terraform generator with AWS SDK v3, beautiful UI, and comprehensive documentation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'No build step required'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:build": "docker build -t ai-terraform-generator .",
+    "docker:run": "docker run -p 3000:3000 ai-terraform-generator",
+    "docker:compose": "docker-compose up -d",
+    "pm2:start": "pm2 start ecosystem.config.js --env production",
+    "pm2:stop": "pm2 stop ai-terraform-generator",
+    "pm2:restart": "pm2 restart ai-terraform-generator",
+    "pm2:logs": "pm2 logs ai-terraform-generator"
+  },
+  "keywords": [
+    "terraform",
+    "aws",
+    "infrastructure",
+    "ai",
+    "bedrock",
+    "iac",
+    "devops"
+  ],
+  "author": "AI Terraform Generator",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.914.0",
+    "@aws-sdk/client-ec2": "^3.914.0",
+    "@aws-sdk/client-sts": "^3.914.0",
+    "express": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
