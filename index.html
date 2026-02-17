@@ -13,17 +13,16 @@
         <header>
             <h1>🏗️ AI Terraform Generator</h1>
             <p>Transform natural language into production-ready infrastructure code</p>
-            <p style="font-size: 0.9rem; opacity: 0.8;">🤖 Powered by Advanced AI Pattern Recognition + Your AWS Account
-            </p>
+            <p style="font-size: 0.9rem;">🤖 Powered by Advanced AI Pattern Recognition + Your AWS Account</p>
             <div id="awsStatus" class="aws-status">
-                <span style="color: #666;">🔄 Checking AWS connection...</span>
+                <span>🔄 Checking AWS connection...</span>
             </div>
         </header>
 
         <main>
             <div class="input-section">
                 <label for="naturalLanguageInput" class="input-label">
-                    Describe Your Infrastructure
+                    💬 Describe Your Infrastructure
                 </label>
                 <textarea id="naturalLanguageInput" placeholder="Describe your infrastructure in plain English...
 
@@ -34,39 +33,41 @@ Examples:
 • Deploy a microservices architecture with container orchestration" rows="6"></textarea>
 
                 <div class="quick-templates">
-                    <h4>🚀 Quick Templates</h4>
+                    <h4>⚡ Quick Start Templates</h4>
                     <div class="template-buttons">
                         <button class="template-btn" onclick="useTemplate('static-website')">
-                            🌐 Static Website
+                            <span>🌐 Static Website</span>
                         </button>
                         <button class="template-btn" onclick="useTemplate('web-app')">
-                            💻 Web Application
+                            <span>💻 Web Application</span>
                         </button>
                         <button class="template-btn" onclick="useTemplate('database')">
-                            🗄️ Database Setup
+                            <span>🗄️ Database Setup</span>
                         </button>
                         <button class="template-btn" onclick="useTemplate('serverless')">
-                            ⚡ Serverless API
+                            <span>⚡ Serverless API</span>
                         </button>
                         <button class="template-btn" onclick="useTemplate('vpc-network')">
-                            🔒 VPC Network
+                            <span>🔒 VPC Network</span>
                         </button>
                         <button class="template-btn" onclick="useTemplate('load-balancer')">
-                            ⚖️ Load Balancer
+                            <span>⚖️ Load Balancer</span>
                         </button>
                         <button class="template-btn" onclick="useTemplate('container')">
-                            📦 Container App
+                            <span>📦 Container App</span>
                         </button>
                         <button class="template-btn" onclick="useTemplate('data-pipeline')">
-                            🔄 Data Pipeline
+                            <span>🔄 Data Pipeline</span>
                         </button>
                     </div>
                 </div>
 
-                <button id="generateBtn" onclick="generateTerraform()">
-                    <span>🚀</span>
-                    Generate Infrastructure
-                </button>
+                <div style="text-align: center;">
+                    <button id="generateBtn" onclick="generateTerraform()">
+                        <span>🚀</span>
+                        Generate Infrastructure Code
+                    </button>
+                </div>
             </div>
 
             <div class="output-section" id="outputSection" style="display: none;">
