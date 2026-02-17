@@ -7,16 +7,23 @@ const app = express();
 const port = 3000;
 
 // Configure AWS SDK v3 clients
-const defaultRegion = process.env.AWS_DEFAULT_REGION || 'eu-central-1';
+const defaultRegion = process.env.AWS_DEFAULT_REGION || process.env.AWS_REGION || 'eu-central-1';
 
-// AWS credentials configuration
+// AWS credentials configuration - explicit for Vercel
 const awsConfig = {
-    region: defaultRegion,
-    credentials: process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY ? {
+    region: defaultRegion
+};
+
+// Only add credentials if they exist
+if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+    awsConfig.credentials = {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-    } : undefined
-};
+    };
+    console.log('✅ AWS credentials configured from environment variables');
+} else {
+    console.log('⚠️ AWS credentials not found in environment variables');
+}
 
 const stsClient = new STSClient(awsConfig);
 const ec2Client = new EC2Client(awsConfig);
@@ -56,6 +63,14 @@ app.get('/api/health', (req, res) => {
 // AWS connection check endpoint
 app.get('/api/aws-status', async (req, res) => {
     try {
+        // Log environment variables (without exposing secrets)
+        console.log('Environment check:', {
+            hasAccessKey: !!process.env.AWS_ACCESS_KEY_ID,
+            hasSecretKey: !!process.env.AWS_SECRET_ACCESS_KEY,
+            hasRegion: !!process.env.AWS_DEFAULT_REGION,
+            region: process.env.AWS_DEFAULT_REGION || 'not set'
+        });
+        
         const command = new GetCallerIdentityCommand({});
         const identity = await stsClient.send(command);
         res.json({
@@ -64,6 +79,7 @@ app.get('/api/aws-status', async (req, res) => {
             region: defaultRegion
         });
     } catch (error) {
+        console.error('AWS Status Error:', error.message);
         res.json({
             connected: false,
             error: error.message
