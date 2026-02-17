@@ -5,43 +5,54 @@ let awsRegion = 'eu-central-1';
 
 // AWS Configuration
 async function configureAWS() {
+    console.log('🔍 Checking AWS connection...');
     try {
         // Add cache-busting parameter
-        const response = await fetch('/api/aws-status?t=' + Date.now());
+        const url = '/api/aws-status?t=' + Date.now();
+        console.log('📡 Fetching:', url);
+        const response = await fetch(url);
+        
+        console.log('📥 Response status:', response.status);
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const data = await response.json();
+        console.log('📦 Response data:', data);
         
         if (data.connected) {
             awsConfigured = true;
             awsAccountId = data.account;
             awsRegion = data.region;
+            console.log('✅ AWS Connected:', data.account, data.region);
             updateAWSStatus(true, data.account, data.region);
             return true;
         } else {
             awsConfigured = false;
+            console.log('❌ AWS Not Connected:', data.error);
             updateAWSStatus(false, data.error);
             return false;
         }
     } catch (error) {
-        console.error('Error checking AWS status:', error);
+        console.error('❌ Error checking AWS status:', error);
         updateAWSStatus(false, error.message);
         return false;
     }
 }
 
 function updateAWSStatus(connected, accountId = null, region = null) {
+    console.log('🔄 Updating AWS status display:', { connected, accountId, region });
     const statusDiv = document.getElementById('awsStatus');
     if (connected) {
         statusDiv.innerHTML = `<span>✅ Connected to AWS Account: ${accountId} (${region})</span>`;
         statusDiv.className = 'aws-status connected';
+        console.log('✅ Status updated to connected');
     } else {
         const errorMsg = accountId ? ` (${accountId})` : '';
         statusDiv.innerHTML = `<span>❌ AWS not configured${errorMsg}</span>`;
         statusDiv.className = 'aws-status disconnected';
+        console.log('❌ Status updated to disconnected');
     }
 }
 
