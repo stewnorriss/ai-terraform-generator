@@ -8,7 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Flutter Terraform Generator</title>
-    <link rel="stylesheet" href="styles.css?v=6.0">
+    <link rel="stylesheet" href="styles.css?v=7.0">
 </head>
 
 <body>
@@ -92,7 +92,20 @@ Examples:
 
             <div class="documentation-section" id="documentationSection" style="display: none;">
                 <div class="docs-container">
-                    <h3>📚 Complete Infrastructure Documentation</h3>
+                    <div class="docs-header-actions" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2xl);">
+                        <h3 style="margin: 0;">📚 Complete Infrastructure Documentation</h3>
+                        <div class="docs-export-buttons" style="display: flex; gap: var(--space-md);">
+                            <button onclick="exportDocumentationAsPDF()" style="padding: var(--space-sm) var(--space-lg); background: linear-gradient(135deg, var(--flutter-red), var(--flutter-yellow)); color: white; border: none; border-radius: var(--radius-md); cursor: pointer; font-weight: 600; font-size: 0.875rem; transition: all 0.3s ease; display: flex; align-items: center; gap: var(--space-xs);">
+                                <span>📄</span> Export PDF
+                            </button>
+                            <button onclick="exportDocumentationAsMarkdown()" style="padding: var(--space-sm) var(--space-lg); background: linear-gradient(135deg, var(--flutter-blue), var(--flutter-purple)); color: white; border: none; border-radius: var(--radius-md); cursor: pointer; font-weight: 600; font-size: 0.875rem; transition: all 0.3s ease; display: flex; align-items: center; gap: var(--space-xs);">
+                                <span>📝</span> Export Markdown
+                            </button>
+                            <button onclick="exportCompletePackage()" style="padding: var(--space-sm) var(--space-lg); background: linear-gradient(135deg, var(--flutter-green), var(--flutter-blue)); color: white; border: none; border-radius: var(--radius-md); cursor: pointer; font-weight: 600; font-size: 0.875rem; transition: all 0.3s ease; display: flex; align-items: center; gap: var(--space-xs);">
+                                <span>📦</span> Export Package
+                            </button>
+                        </div>
+                    </div>
                     <div id="documentationContent"></div>
                 </div>
             </div>
@@ -104,7 +117,7 @@ Examples:
         </main>
     </div>
 
-    <script src="script.js?v=6.0"></script>
+    <script src="script.js?v=7.0"></script>
     <script>
         // Initialize AWS connection check on page load
         document.addEventListener('DOMContentLoaded', function () {

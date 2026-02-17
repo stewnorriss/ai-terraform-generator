@@ -2733,3 +2733,422 @@ document.getElementById('naturalLanguageInput').addEventListener('keydown', func
         generateTerraform();
     }
 });
+
+
+// Export documentation as PDF
+async function exportDocumentationAsPDF() {
+    const docsContent = document.getElementById('documentationContent');
+    if (!docsContent || !docsContent.innerHTML) {
+        showNotification('No documentation available to export', 'warning');
+        return;
+    }
+    
+    showNotification('Preparing PDF export...', 'info');
+    
+    // Create a printable version
+    const printWindow = window.open('', '_blank');
+    const terraformCode = document.getElementById('terraformCodeContent')?.textContent || '';
+    const explanation = document.getElementById('explanation')?.textContent || '';
+    
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Terraform Infrastructure Documentation</title>
+            <style>
+                @page { margin: 2cm; }
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                    max-width: 100%;
+                    margin: 0;
+                    padding: 20px;
+                }
+                h1, h2, h3, h4, h5, h6 {
+                    color: #16215B;
+                    margin-top: 1.5em;
+                    margin-bottom: 0.5em;
+                    page-break-after: avoid;
+                }
+                h1 { font-size: 2.5em; border-bottom: 3px solid #0285FF; padding-bottom: 10px; }
+                h2 { font-size: 2em; border-bottom: 2px solid #0285FF; padding-bottom: 8px; }
+                h3 { font-size: 1.5em; color: #0285FF; }
+                h4 { font-size: 1.25em; }
+                .header {
+                    text-align: center;
+                    margin-bottom: 40px;
+                    padding: 30px;
+                    background: linear-gradient(135deg, #16215B, #0285FF);
+                    color: white;
+                    border-radius: 10px;
+                }
+                .header h1 { color: white; border: none; margin: 0; }
+                .header p { margin: 10px 0 0 0; opacity: 0.9; }
+                .section {
+                    margin: 30px 0;
+                    page-break-inside: avoid;
+                }
+                .code-block {
+                    background: #f5f7fa;
+                    border-left: 4px solid #0285FF;
+                    padding: 15px;
+                    margin: 15px 0;
+                    font-family: 'Courier New', monospace;
+                    font-size: 0.9em;
+                    overflow-x: auto;
+                    page-break-inside: avoid;
+                }
+                .resource-card {
+                    border: 2px solid #e5e7eb;
+                    border-radius: 8px;
+                    padding: 20px;
+                    margin: 20px 0;
+                    page-break-inside: avoid;
+                }
+                .resource-card h4 {
+                    margin-top: 0;
+                    color: #16215B;
+                }
+                .resource-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 15px;
+                    margin: 15px 0;
+                }
+                .resource-detail {
+                    padding: 10px;
+                    background: #f9fafb;
+                    border-radius: 5px;
+                }
+                .resource-detail strong {
+                    display: block;
+                    color: #0285FF;
+                    margin-bottom: 5px;
+                }
+                ul, ol {
+                    margin: 10px 0;
+                    padding-left: 30px;
+                }
+                li {
+                    margin: 8px 0;
+                }
+                .timeline-step {
+                    display: flex;
+                    gap: 20px;
+                    margin: 20px 0;
+                    page-break-inside: avoid;
+                }
+                .step-marker {
+                    background: #0285FF;
+                    color: white;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    flex-shrink: 0;
+                }
+                .step-content {
+                    flex: 1;
+                }
+                .practices-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                    margin: 20px 0;
+                }
+                .practice-category {
+                    border: 1px solid #e5e7eb;
+                    border-radius: 8px;
+                    padding: 15px;
+                    page-break-inside: avoid;
+                }
+                .practice-category h6 {
+                    color: #0285FF;
+                    margin-top: 0;
+                }
+                .footer {
+                    margin-top: 50px;
+                    padding-top: 20px;
+                    border-top: 2px solid #e5e7eb;
+                    text-align: center;
+                    color: #6b7280;
+                    font-size: 0.9em;
+                }
+                @media print {
+                    body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+                    .no-print { display: none; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>🏗️ Terraform Infrastructure Documentation</h1>
+                <p>Generated on ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                <p>AWS Region: ${awsRegion || 'eu-central-1'} | Account: ${awsAccountId || 'Not Connected'}</p>
+            </div>
+            
+            <div class="section">
+                <h2>📋 Infrastructure Overview</h2>
+                <div>${explanation}</div>
+            </div>
+            
+            <div class="section">
+                <h2>⚡ Terraform Configuration</h2>
+                <div class="code-block"><pre>${terraformCode}</pre></div>
+            </div>
+            
+            <div class="section">
+                ${docsContent.innerHTML}
+            </div>
+            
+            <div class="footer">
+                <p>Generated by Flutter Terraform Generator</p>
+                <p>https://terraform-generator.vercel.app</p>
+            </div>
+            
+            <div class="no-print" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+                <button onclick="window.print()" style="padding: 12px 24px; background: #0285FF; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600;">
+                    🖨️ Print / Save as PDF
+                </button>
+                <button onclick="window.close()" style="padding: 12px 24px; background: #6b7280; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; margin-left: 10px;">
+                    ✕ Close
+                </button>
+            </div>
+        </body>
+        </html>
+    `);
+    
+    printWindow.document.close();
+    
+    // Auto-trigger print dialog after a short delay
+    setTimeout(() => {
+        printWindow.focus();
+        printWindow.print();
+    }, 500);
+}
+
+// Export documentation as Markdown
+function exportDocumentationAsMarkdown() {
+    const docsContent = document.getElementById('documentationContent');
+    if (!docsContent || !docsContent.innerHTML) {
+        showNotification('No documentation available to export', 'warning');
+        return;
+    }
+    
+    const terraformCode = document.getElementById('terraformCodeContent')?.textContent || '';
+    const explanation = document.getElementById('explanation')?.textContent || '';
+    const input = document.getElementById('naturalLanguageInput')?.value || '';
+    
+    // Convert HTML documentation to Markdown
+    let markdown = `# Terraform Infrastructure Documentation
+
+**Generated:** ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}  
+**AWS Region:** ${awsRegion || 'eu-central-1'}  
+**AWS Account:** ${awsAccountId || 'Not Connected'}
+
+---
+
+## 📋 Original Request
+
+${input}
+
+---
+
+## 🏗️ Infrastructure Overview
+
+${explanation}
+
+---
+
+## ⚡ Terraform Configuration
+
+\`\`\`hcl
+${terraformCode}
+\`\`\`
+
+---
+
+## 🚀 Deployment Guide
+
+### Prerequisites
+
+- AWS CLI configured with appropriate permissions
+- Terraform installed (version 1.0+)
+- Text editor for configuration files
+
+### Step 1: Initialize Project
+
+\`\`\`bash
+terraform init
+\`\`\`
+
+Downloads AWS provider and initializes the working directory.
+
+### Step 2: Review Plan
+
+\`\`\`bash
+terraform plan
+\`\`\`
+
+Shows exactly what resources will be created and their dependencies.
+
+### Step 3: Deploy Infrastructure
+
+\`\`\`bash
+terraform apply
+\`\`\`
+
+Creates all resources in the correct order based on dependencies.
+
+### Step 4: Verify & Monitor
+
+\`\`\`bash
+terraform show
+\`\`\`
+
+Verify deployment and monitor resources in AWS Console.
+
+---
+
+## 💡 Best Practices & Security
+
+### 🔒 Security
+
+- Use IAM roles instead of access keys
+- Enable encryption at rest and in transit
+- Implement least privilege access
+- Regular security audits and updates
+
+### 📊 State Management
+
+- Use remote state with S3 + DynamoDB
+- Enable state locking for team collaboration
+- Regular state backups
+- Version control for configurations
+
+### 🏷️ Organization
+
+- Consistent tagging strategy
+- Environment separation (dev/staging/prod)
+- Modular code structure
+- Documentation and comments
+
+### 🔧 Operations
+
+- Automated testing and validation
+- CI/CD pipeline integration
+- Monitoring and alerting
+- Disaster recovery planning
+
+---
+
+## 📚 Additional Resources
+
+- [Terraform AWS Provider Documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
+- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
+- [Terraform Best Practices](https://www.terraform-best-practices.com/)
+
+---
+
+*Generated by Flutter Terraform Generator*  
+*https://terraform-generator.vercel.app*
+`;
+    
+    // Create and download the markdown file
+    const blob = new Blob([markdown], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'terraform-documentation.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    showNotification('Documentation exported as Markdown!', 'success');
+}
+
+// Export complete package (Terraform + Documentation)
+function exportCompletePackage() {
+    const terraformCode = document.getElementById('terraformCodeContent')?.textContent;
+    const docsContent = document.getElementById('documentationContent');
+    
+    if (!terraformCode) {
+        showNotification('No Terraform code available to export', 'warning');
+        return;
+    }
+    
+    showNotification('Preparing complete package...', 'info');
+    
+    // Create a README.md
+    const readme = `# Terraform Infrastructure Project
+
+Generated on ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+
+## Quick Start
+
+1. Install Terraform: https://www.terraform.io/downloads
+2. Configure AWS credentials
+3. Run the following commands:
+
+\`\`\`bash
+terraform init
+terraform plan
+terraform apply
+\`\`\`
+
+## Files
+
+- \`main.tf\` - Main Terraform configuration
+- \`DOCUMENTATION.md\` - Complete infrastructure documentation
+- \`README.md\` - This file
+
+## AWS Configuration
+
+**Region:** ${awsRegion || 'eu-central-1'}  
+**Account:** ${awsAccountId || 'Configure your AWS credentials'}
+
+## Support
+
+For issues or questions, visit: https://terraform-generator.vercel.app
+`;
+    
+    // Since we can't create a ZIP in the browser without a library,
+    // we'll download files individually with a delay
+    const files = [
+        { name: 'main.tf', content: terraformCode, type: 'text/plain' },
+        { name: 'README.md', content: readme, type: 'text/markdown' }
+    ];
+    
+    // Add documentation if available
+    if (docsContent && docsContent.innerHTML) {
+        exportDocumentationAsMarkdown(); // This will download DOCUMENTATION.md
+    }
+    
+    // Download other files with delays
+    files.forEach((file, index) => {
+        setTimeout(() => {
+            const blob = new Blob([file.content], { type: file.type });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = file.name;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            if (index === files.length - 1) {
+                setTimeout(() => {
+                    showNotification('Complete package exported successfully!', 'success');
+                }, 500);
+            }
+        }, index * 1000); // 1 second delay between downloads
+    });
+}
