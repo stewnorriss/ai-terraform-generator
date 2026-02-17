@@ -87,7 +87,7 @@
 
 body {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #F5F7FA;
+    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--dark-navy) 50%, var(--flutter-blue) 100%);
     min-height: 100vh;
     color: var(--text-primary);
     line-height: 1.6;
@@ -104,7 +104,10 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(180deg, #FFFFFF 0%, #F5F7FA 100%);
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(97, 210, 126, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(137, 92, 245, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(2, 133, 255, 0.15) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
 }
@@ -121,8 +124,10 @@ header {
     text-align: center;
     margin-bottom: var(--space-2xl);
     padding: var(--space-3xl) 0 var(--space-2xl);
-    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--dark-navy) 100%);
-    box-shadow: 0 4px 20px rgba(22, 33, 91, 0.15);
+    background: linear-gradient(135deg, rgba(22, 33, 91, 0.95) 0%, rgba(11, 17, 46, 0.95) 50%, rgba(2, 133, 255, 0.85) 100%);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 header h1 {
@@ -162,32 +167,34 @@ header p:last-of-type {
     padding: var(--space-sm) var(--space-xl);
     border-radius: var(--radius-md);
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
     transition: all var(--transition-base);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .aws-status.connected {
-    background: #FFFFFF;
-    color: var(--flutter-green);
-    border: 1px solid var(--flutter-green);
+    background: linear-gradient(135deg, rgba(97, 210, 126, 0.95) 0%, rgba(5, 150, 105, 0.95) 100%);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .aws-status.disconnected {
-    background: #FFFFFF;
-    color: var(--flutter-red);
-    border: 1px solid var(--flutter-red);
+    background: linear-gradient(135deg, rgba(213, 34, 93, 0.95) 0%, rgba(185, 28, 28, 0.95) 100%);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 main {
-    background: var(--bg-primary);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
     border-radius: var(--radius-xl);
     padding: var(--space-3xl);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--border-light);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .input-section {
@@ -237,7 +244,7 @@ main {
 }
 
 #generateBtn {
-    background: var(--flutter-navy);
+    background: linear-gradient(135deg, var(--flutter-blue) 0%, var(--flutter-purple) 100%);
     color: white;
     border: none;
     padding: var(--space-lg) var(--space-3xl);
@@ -251,24 +258,32 @@ main {
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    box-shadow: 0 4px 12px rgba(22, 33, 91, 0.2);
+    box-shadow: 0 8px 24px rgba(2, 133, 255, 0.4);
     position: relative;
     width: 100%;
     max-width: 400px;
+    overflow: hidden;
 }
 
 #generateBtn::before {
-    display: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
 }
 
 #generateBtn:hover {
-    background: var(--dark-navy);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(22, 33, 91, 0.3);
+    background: linear-gradient(135deg, var(--flutter-purple) 0%, var(--flutter-blue) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(137, 92, 245, 0.5);
 }
 
 #generateBtn:hover::before {
-    display: none;
+    left: 100%;
 }
 
 #generateBtn:active {
@@ -311,17 +326,38 @@ main {
 }
 
 .explanation, .terraform-code {
-    background: var(--bg-primary);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: var(--space-2xl);
     border-radius: var(--radius-2xl);
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-xl);
+    border: 2px solid rgba(2, 133, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     transition: all var(--transition-slow);
+    position: relative;
+    overflow: hidden;
+}
+
+.explanation::before, .terraform-code::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--flutter-blue), var(--flutter-purple), var(--flutter-green));
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .explanation:hover, .terraform-code:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-2xl);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(2, 133, 255, 0.3);
+    border-color: var(--flutter-blue);
 }
 
 .explanation h3, .terraform-code h3 {
@@ -571,43 +607,43 @@ main {
 }
 
 #copyBtn {
-    background: var(--success);
+    background: linear-gradient(135deg, var(--flutter-green) 0%, #059669 100%);
     color: white;
-    border-color: var(--success);
+    border-color: var(--flutter-green);
 }
 
 #copyBtn:hover {
-    background: #059669;
+    background: linear-gradient(135deg, #059669 0%, var(--flutter-green) 100%);
     border-color: #059669;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(97, 210, 126, 0.5);
 }
 
 #downloadBtn {
-    background: var(--secondary);
+    background: linear-gradient(135deg, var(--flutter-purple) 0%, #7c3aed 100%);
     color: white;
-    border-color: var(--secondary);
+    border-color: var(--flutter-purple);
 }
 
 #downloadBtn:hover {
-    background: #7c3aed;
+    background: linear-gradient(135deg, #7c3aed 0%, var(--flutter-purple) 100%);
     border-color: #7c3aed;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(137, 92, 245, 0.5);
 }
 
 #docsBtn {
-    background: var(--bg-primary);
-    color: var(--text-secondary);
-    border-color: var(--border-medium);
+    background: linear-gradient(135deg, var(--flutter-yellow) 0%, var(--flutter-red) 100%);
+    color: white;
+    border-color: var(--flutter-yellow);
 }
 
 #docsBtn:hover {
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--flutter-red) 0%, var(--flutter-yellow) 100%);
     color: white;
-    border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(6, 182, 212, 0.3);
+    border-color: var(--flutter-red);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(248, 205, 75, 0.5);
 }
 
 .code-block {
@@ -623,9 +659,9 @@ main {
 .quick-templates {
     margin: var(--space-xl) 0;
     padding: var(--space-2xl);
-    background: var(--bg-secondary);
+    background: linear-gradient(135deg, rgba(204, 229, 255, 0.3) 0%, rgba(248, 205, 75, 0.2) 100%);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--border-light);
+    border: 2px solid rgba(2, 133, 255, 0.2);
 }
 
 .quick-templates h4 {
@@ -643,30 +679,43 @@ main {
 }
 
 .template-btn {
-    background: var(--bg-primary);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-light);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--flutter-navy);
+    border: 2px solid rgba(2, 133, 255, 0.3);
     padding: var(--space-md) var(--space-lg);
     border-radius: var(--radius-md);
     cursor: pointer;
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     transition: all var(--transition-base);
     text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     position: relative;
+    overflow: hidden;
 }
 
 .template-btn::before {
-    display: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--flutter-blue) 0%, var(--flutter-purple) 100%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: 0;
 }
 
 .template-btn:hover {
-    background: var(--flutter-navy);
     color: white;
-    border-color: var(--flutter-navy);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(22, 33, 91, 0.15);
+    border-color: var(--flutter-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(2, 133, 255, 0.4);
+}
+
+.template-btn:hover::before {
+    opacity: 1;
 }
 
 .template-btn span {
@@ -675,19 +724,20 @@ main {
 }
 
 .template-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(2, 133, 255, 0.3);
 }
 
 .template-btn.selected {
-    background: var(--flutter-navy);
+    background: linear-gradient(135deg, var(--flutter-green) 0%, var(--flutter-blue) 100%);
     color: white;
-    border-color: var(--flutter-navy);
-    box-shadow: 0 4px 12px rgba(22, 33, 91, 0.2);
+    border-color: var(--flutter-green);
+    box-shadow: 0 6px 16px rgba(97, 210, 126, 0.4);
 }
 
 .template-btn.selected::before {
-    display: none;
+    opacity: 1;
+    background: linear-gradient(135deg, var(--flutter-green) 0%, var(--flutter-blue) 100%);
 }
 
 /* Template tooltip */
