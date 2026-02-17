@@ -6,7 +6,8 @@ let awsRegion = 'eu-central-1';
 // AWS Configuration
 async function configureAWS() {
     try {
-        const response = await fetch('/api/aws-status');
+        // Add cache-busting parameter
+        const response = await fetch('/api/aws-status?t=' + Date.now());
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
