@@ -87,8 +87,7 @@
 
 body {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #16215B 0%, #0B112E 50%, #0285FF 100%);
-    background-attachment: fixed;
+    background: #F5F7FA;
     min-height: 100vh;
     color: var(--text-primary);
     line-height: 1.6;
@@ -105,9 +104,7 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 50%, rgba(2, 133, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(137, 92, 245, 0.15) 0%, transparent 50%);
+    background: linear-gradient(180deg, #FFFFFF 0%, #F5F7FA 100%);
     pointer-events: none;
     z-index: 0;
 }
@@ -124,73 +121,73 @@ header {
     text-align: center;
     margin-bottom: var(--space-2xl);
     padding: var(--space-3xl) 0 var(--space-2xl);
+    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--dark-navy) 100%);
+    box-shadow: 0 4px 20px rgba(22, 33, 91, 0.15);
 }
 
 header h1 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 600;
     font-family: 'Clash Display', 'Poppins', sans-serif;
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
     color: white;
-    letter-spacing: -0.02em;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.01em;
     line-height: 1.2;
 }
 
 header p {
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: var(--space-sm);
-    max-width: 600px;
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 header p:last-of-type {
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.85);
-    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     padding: var(--space-sm) var(--space-lg);
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     display: inline-block;
     margin-top: var(--space-md);
 }
 
 .aws-status {
     margin-top: var(--space-lg);
-    padding: var(--space-md) var(--space-xl);
-    border-radius: var(--radius-xl);
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-md);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
     transition: all var(--transition-base);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .aws-status.connected {
-    background: rgba(16, 185, 129, 0.95);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: #FFFFFF;
+    color: var(--flutter-green);
+    border: 1px solid var(--flutter-green);
 }
 
 .aws-status.disconnected {
-    background: rgba(239, 68, 68, 0.95);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: #FFFFFF;
+    color: var(--flutter-red);
+    border: 1px solid var(--flutter-red);
 }
 
 main {
     background: var(--bg-primary);
-    border-radius: var(--radius-2xl);
+    border-radius: var(--radius-xl);
     padding: var(--space-3xl);
-    box-shadow: var(--shadow-2xl);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-light);
 }
 
 .input-section {
@@ -203,9 +200,9 @@ main {
 
 .input-label {
     display: block;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--flutter-navy);
     margin-bottom: var(--space-md);
     letter-spacing: -0.01em;
 }
@@ -214,11 +211,11 @@ main {
     width: 100%;
     padding: var(--space-lg);
     border: 2px solid var(--border-light);
-    border-radius: var(--radius-xl);
-    font-size: 1rem;
+    border-radius: var(--radius-lg);
+    font-size: 0.9375rem;
     font-family: inherit;
     resize: vertical;
-    min-height: 150px;
+    min-height: 140px;
     background: var(--bg-primary);
     color: var(--text-primary);
     transition: all var(--transition-base);
@@ -231,9 +228,8 @@ main {
 
 #naturalLanguageInput:focus {
     outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-    transform: translateY(-2px);
+    border-color: var(--flutter-blue);
+    box-shadow: 0 0 0 3px rgba(2, 133, 255, 0.1);
 }
 
 #naturalLanguageInput::placeholder {
@@ -241,13 +237,13 @@ main {
 }
 
 #generateBtn {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background: var(--flutter-navy);
     color: white;
     border: none;
     padding: var(--space-lg) var(--space-3xl);
-    font-size: 1.125rem;
-    font-weight: 700;
-    border-radius: var(--radius-xl);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
     cursor: pointer;
     margin-top: var(--space-xl);
     transition: all var(--transition-base);
@@ -255,36 +251,29 @@ main {
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 4px 12px rgba(22, 33, 91, 0.2);
     position: relative;
-    overflow: hidden;
     width: 100%;
     max-width: 400px;
 }
 
 #generateBtn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
+    display: none;
 }
 
 #generateBtn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+    background: var(--dark-navy);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(22, 33, 91, 0.3);
 }
 
 #generateBtn:hover::before {
-    left: 100%;
+    display: none;
 }
 
 #generateBtn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(22, 33, 91, 0.2);
 }
 
 #generateBtn:disabled {
@@ -295,7 +284,7 @@ main {
 
 #generateBtn:disabled:hover {
     transform: none;
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 4px 12px rgba(22, 33, 91, 0.2);
 }
 
 #generateBtn:disabled::before {
@@ -634,15 +623,15 @@ main {
 .quick-templates {
     margin: var(--space-xl) 0;
     padding: var(--space-2xl);
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-    border-radius: var(--radius-2xl);
-    border: 2px solid var(--border-light);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-light);
 }
 
 .quick-templates h4 {
-    color: var(--text-primary);
-    font-size: 1.25rem;
-    font-weight: 700;
+    color: var(--flutter-navy);
+    font-size: 1.125rem;
+    font-weight: 600;
     margin-bottom: var(--space-xl);
     text-align: center;
 }
@@ -656,40 +645,28 @@ main {
 .template-btn {
     background: var(--bg-primary);
     color: var(--text-secondary);
-    border: 2px solid var(--border-light);
+    border: 1px solid var(--border-light);
     padding: var(--space-md) var(--space-lg);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 0.9375rem;
-    font-weight: 600;
+    font-size: 0.875rem;
+    font-weight: 500;
     transition: all var(--transition-base);
     text-align: center;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     position: relative;
-    overflow: hidden;
 }
 
 .template-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    opacity: 0;
-    transition: opacity var(--transition-base);
+    display: none;
 }
 
 .template-btn:hover {
+    background: var(--flutter-navy);
     color: white;
-    border-color: var(--primary);
+    border-color: var(--flutter-navy);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.template-btn:hover::before {
-    opacity: 1;
+    box-shadow: 0 4px 12px rgba(22, 33, 91, 0.15);
 }
 
 .template-btn span {
@@ -699,18 +676,18 @@ main {
 
 .template-btn:active {
     transform: translateY(0);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .template-btn.selected {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background: var(--flutter-navy);
     color: white;
-    border-color: var(--primary);
-    box-shadow: var(--shadow-md);
+    border-color: var(--flutter-navy);
+    box-shadow: 0 4px 12px rgba(22, 33, 91, 0.2);
 }
 
 .template-btn.selected::before {
-    opacity: 1;
+    display: none;
 }
 
 /* Template tooltip */
