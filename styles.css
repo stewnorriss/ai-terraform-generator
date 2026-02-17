@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap');
 
 * {
     margin: 0;
@@ -7,15 +8,25 @@
 }
 
 :root {
-    /* Modern Color Palette - Enhanced */
-    --primary: #6366f1;
-    --primary-dark: #4f46e5;
-    --primary-light: #818cf8;
-    --secondary: #8b5cf6;
-    --accent: #06b6d4;
-    --success: #10b981;
-    --warning: #f59e0b;
-    --error: #ef4444;
+    /* Flutter Brand Colors */
+    --flutter-navy: #16215B;
+    --dark-navy: #0B112E;
+    --flutter-blue: #0285FF;
+    --sky-blue: #CCE5FF;
+    --flutter-green: #61D27E;
+    --flutter-red: #D5225D;
+    --flutter-yellow: #F8CD4B;
+    --flutter-purple: #895CF5;
+    
+    /* Primary Colors */
+    --primary: #16215B;
+    --primary-dark: #0B112E;
+    --primary-light: #0285FF;
+    --secondary: #895CF5;
+    --accent: #0285FF;
+    --success: #61D27E;
+    --warning: #F8CD4B;
+    --error: #D5225D;
     
     /* Neutral Colors */
     --gray-50: #f9fafb;
@@ -75,8 +86,8 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #16215B 0%, #0B112E 50%, #0285FF 100%);
     background-attachment: fixed;
     min-height: 100vh;
     color: var(--text-primary);
@@ -95,8 +106,8 @@ body::before {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(2, 133, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(137, 92, 245, 0.15) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
 }
@@ -117,11 +128,12 @@ header {
 
 header h1 {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 800;
+    font-weight: 700;
+    font-family: 'Clash Display', 'Poppins', sans-serif;
     margin-bottom: var(--space-lg);
     color: white;
     letter-spacing: -0.02em;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     line-height: 1.2;
 }
 
