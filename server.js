@@ -9,9 +9,18 @@ const port = 3000;
 // Configure AWS SDK v3 clients
 const defaultRegion = process.env.AWS_DEFAULT_REGION || 'eu-central-1';
 
-const stsClient = new STSClient({ region: defaultRegion });
-const ec2Client = new EC2Client({ region: defaultRegion });
-const bedrockClient = new BedrockRuntimeClient({ region: defaultRegion });
+// AWS credentials configuration
+const awsConfig = {
+    region: defaultRegion,
+    credentials: process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY ? {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    } : undefined
+};
+
+const stsClient = new STSClient(awsConfig);
+const ec2Client = new EC2Client(awsConfig);
+const bedrockClient = new BedrockRuntimeClient(awsConfig);
 
 // Security middleware
 app.use((req, res, next) => {
