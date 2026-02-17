@@ -7,6 +7,11 @@ let awsRegion = 'eu-central-1';
 async function configureAWS() {
     try {
         const response = await fetch('/api/aws-status');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         
         if (data.connected) {
@@ -17,12 +22,12 @@ async function configureAWS() {
             return true;
         } else {
             awsConfigured = false;
-            updateAWSStatus(false);
+            updateAWSStatus(false, data.error);
             return false;
         }
     } catch (error) {
         console.error('Error checking AWS status:', error);
-        updateAWSStatus(false);
+        updateAWSStatus(false, error.message);
         return false;
     }
 }
@@ -30,10 +35,11 @@ async function configureAWS() {
 function updateAWSStatus(connected, accountId = null, region = null) {
     const statusDiv = document.getElementById('awsStatus');
     if (connected) {
-        statusDiv.innerHTML = `<span style="color: #38a169;">✅ Connected to AWS Account: ${accountId} (${region})</span>`;
+        statusDiv.innerHTML = `<span>✅ Connected to AWS Account: ${accountId} (${region})</span>`;
         statusDiv.className = 'aws-status connected';
     } else {
-        statusDiv.innerHTML = `<span style="color: #e53e3e;">❌ AWS not configured - run 'aws configure' in terminal</span>`;
+        const errorMsg = accountId ? ` (${accountId})` : '';
+        statusDiv.innerHTML = `<span>❌ AWS not configured${errorMsg}</span>`;
         statusDiv.className = 'aws-status disconnected';
     }
 }
