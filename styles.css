@@ -167,10 +167,10 @@ header p {
 
 header p:last-of-type {
     font-size: 0.875rem;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     background: var(--bg-secondary);
     padding: var(--space-sm) var(--space-lg);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     border: 1px solid var(--border-light);
     display: inline-block;
     margin-top: var(--space-md);
@@ -219,12 +219,9 @@ main {
 
 .input-label {
     display: block;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--flutter-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--flutter-navy);
     margin-bottom: var(--space-md);
     letter-spacing: -0.01em;
 }
@@ -341,31 +338,24 @@ main {
 
 .explanation h3, .terraform-code h3 {
     margin-bottom: var(--space-xl);
-    font-weight: 800;
-    font-size: 1.5rem;
+    font-weight: 700;
+    font-size: 1.375rem;
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--flutter-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.02em;
+    color: var(--flutter-navy);
+    letter-spacing: -0.01em;
 }
 
 #explanation {
     line-height: 1.8;
     color: var(--text-secondary);
-    font-size: 1.0625rem;
+    font-size: 1rem;
 }
 
 #explanation strong {
     color: var(--flutter-navy);
     font-weight: 700;
-    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--flutter-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 #explanation p {
@@ -687,12 +677,9 @@ main {
 }
 
 .quick-templates h4 {
-    font-size: 1.375rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--flutter-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--flutter-navy);
     margin-bottom: var(--space-xl);
     text-align: center;
     letter-spacing: -0.01em;
@@ -815,15 +802,12 @@ main {
 }
 
 .docs-container h3 {
-    font-size: 2.25rem;
-    font-weight: 800;
+    font-size: 2rem;
+    font-weight: 700;
     margin-bottom: var(--space-2xl);
     text-align: center;
-    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--flutter-blue) 50%, var(--flutter-purple) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.02em;
+    color: var(--flutter-navy);
+    letter-spacing: -0.01em;
 }
 
 .docs-overview {
@@ -836,13 +820,10 @@ main {
 }
 
 .docs-overview h4 {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     font-weight: 700;
     margin-bottom: var(--space-md);
-    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--flutter-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--flutter-navy);
 }
 
 .docs-overview p {
@@ -891,16 +872,13 @@ main {
 }
 
 .docs-resource h5 {
-    font-size: 1.375rem;
+    font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: var(--space-md);
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--flutter-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--flutter-navy);
 }
 
 .docs-resource-content p {
@@ -925,13 +903,10 @@ main {
 }
 
 .docs-deployment h4 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: var(--space-xl);
-    background: linear-gradient(135deg, var(--flutter-green) 0%, var(--flutter-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--flutter-navy);
 }
 
 .deployment-steps {
@@ -1008,13 +983,10 @@ main {
 }
 
 .docs-best-practices h4 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: var(--space-xl);
-    background: linear-gradient(135deg, var(--flutter-yellow) 0%, var(--flutter-red) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--flutter-navy);
 }
 
 .docs-best-practices ul {
@@ -2575,12 +2547,9 @@ main {
 }
 
 .loading p {
-    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--flutter-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--flutter-navy);
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
 }
 
 /* Responsive Design */
