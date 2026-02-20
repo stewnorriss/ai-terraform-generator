@@ -134,35 +134,10 @@ header {
     margin-bottom: var(--space-lg);
 }
 
-.flutter-logo-text {
-    background: white;
-    padding: var(--space-md) var(--space-xl);
-    border-radius: var(--radius-md);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-xs);
-}
-
-.flutter-text {
-    font-family: 'Clash Display', 'Poppins', sans-serif;
-    font-size: 1.75rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--flutter-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.cee-text {
-    font-family: 'Clash Display', 'Poppins', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: var(--flutter-blue);
-    position: relative;
-    top: -0.25rem;
+.flutter-cee-logo {
+    height: 60px;
+    width: auto;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
 }
 
 .header-divider {
@@ -2937,16 +2912,8 @@ textarea:focus {
         gap: var(--space-md);
     }
     
-    .flutter-logo-text {
-        padding: var(--space-sm) var(--space-lg);
-    }
-    
-    .flutter-text {
-        font-size: 1.5rem;
-    }
-    
-    .cee-text {
-        font-size: 1.125rem;
+    .flutter-cee-logo {
+        height: 50px;
     }
     
     .header-divider {
@@ -2961,12 +2928,8 @@ textarea:focus {
 }
 
 @media (max-width: 480px) {
-    .flutter-text {
-        font-size: 1.25rem;
-    }
-    
-    .cee-text {
-        font-size: 1rem;
+    .flutter-cee-logo {
+        height: 40px;
     }
     
     header h1 {
