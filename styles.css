@@ -134,10 +134,17 @@ header {
     margin-bottom: var(--space-lg);
 }
 
-.flutter-cee-logo {
-    height: 60px;
+.flutter-cee-logo-container {
+    background: white;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.flutter-cee-logo-svg {
+    height: 50px;
     width: auto;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+    display: block;
 }
 
 .header-divider {
@@ -2912,8 +2919,12 @@ textarea:focus {
         gap: var(--space-md);
     }
     
-    .flutter-cee-logo {
-        height: 50px;
+    .flutter-cee-logo-container {
+        padding: var(--space-sm) var(--space-lg);
+    }
+    
+    .flutter-cee-logo-svg {
+        height: 40px;
     }
     
     .header-divider {
@@ -2928,8 +2939,8 @@ textarea:focus {
 }
 
 @media (max-width: 480px) {
-    .flutter-cee-logo {
-        height: 40px;
+    .flutter-cee-logo-svg {
+        height: 35px;
     }
     
     header h1 {
