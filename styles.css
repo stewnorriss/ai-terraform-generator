@@ -120,44 +120,57 @@ body::before {
 header {
     text-align: center;
     margin-bottom: var(--space-2xl);
-    padding: var(--space-2xl) 0;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border-bottom: 3px solid var(--flutter-blue);
+    padding: var(--space-3xl) 0 var(--space-2xl);
+    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--dark-navy) 100%);
+    box-shadow: 0 4px 20px rgba(22, 33, 91, 0.2);
+    border-bottom: 4px solid var(--flutter-blue);
 }
 
 .header-logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
     margin-bottom: var(--space-lg);
 }
 
-.header-logo img {
-    height: 50px;
-    width: auto;
+.flutter-logo-text {
+    background: white;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.flutter-text {
+    font-family: 'Clash Display', 'Poppins', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    background: linear-gradient(135deg, var(--flutter-navy) 0%, var(--flutter-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .header-divider {
     width: 2px;
     height: 50px;
-    background: linear-gradient(180deg, transparent, var(--flutter-blue), transparent);
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.5), transparent);
 }
 
 header h1 {
-    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
     font-weight: 700;
     font-family: 'Clash Display', 'Poppins', sans-serif;
-    margin-bottom: var(--space-md);
-    color: var(--flutter-navy);
+    margin: 0;
+    color: white;
     letter-spacing: -0.02em;
     line-height: 1.2;
 }
 
 header p {
     font-size: 1.125rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: var(--space-sm);
     max-width: 700px;
     margin-left: auto;
@@ -165,13 +178,14 @@ header p {
     font-weight: 400;
 }
 
-header p:last-of-type {
+header p.powered-by {
     font-size: 0.875rem;
-    color: var(--text-secondary);
-    background: var(--bg-secondary);
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     padding: var(--space-sm) var(--space-lg);
     border-radius: var(--radius-md);
-    border: 1px solid var(--border-light);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     display: inline-block;
     margin-top: var(--space-md);
 }
@@ -186,19 +200,19 @@ header p:last-of-type {
     align-items: center;
     gap: var(--space-sm);
     transition: all var(--transition-base);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .aws-status.connected {
-    background: white;
-    color: var(--flutter-green);
-    border: 2px solid var(--flutter-green);
+    background: linear-gradient(135deg, var(--flutter-green) 0%, #059669 100%);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .aws-status.disconnected {
-    background: white;
-    color: var(--flutter-red);
-    border: 2px solid var(--flutter-red);
+    background: linear-gradient(135deg, var(--flutter-red) 0%, #b91c1c 100%);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 main {
@@ -256,7 +270,7 @@ main {
 }
 
 #generateBtn {
-    background: var(--flutter-blue);
+    background: linear-gradient(135deg, var(--flutter-blue) 0%, var(--flutter-purple) 100%);
     color: white;
     border: none;
     padding: var(--space-lg) var(--space-3xl);
@@ -270,16 +284,16 @@ main {
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    box-shadow: 0 2px 8px rgba(2, 133, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(2, 133, 255, 0.4);
     position: relative;
     width: 100%;
     max-width: 400px;
 }
 
 #generateBtn:hover {
-    background: var(--flutter-navy);
+    background: linear-gradient(135deg, var(--flutter-purple) 0%, var(--flutter-blue) 100%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(2, 133, 255, 0.4);
+    box-shadow: 0 6px 24px rgba(137, 92, 245, 0.5);
 }
 
 #generateBtn:active {
@@ -619,43 +633,43 @@ main {
 }
 
 #copyBtn {
-    background: var(--flutter-green);
+    background: linear-gradient(135deg, var(--flutter-green) 0%, #059669 100%);
     color: white;
     border-color: var(--flutter-green);
 }
 
 #copyBtn:hover {
-    background: #059669;
+    background: linear-gradient(135deg, #059669 0%, var(--flutter-green) 100%);
     border-color: #059669;
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(97, 210, 126, 0.3);
+    box-shadow: 0 6px 20px rgba(97, 210, 126, 0.4);
 }
 
 #downloadBtn {
-    background: var(--flutter-purple);
+    background: linear-gradient(135deg, var(--flutter-purple) 0%, #7c3aed 100%);
     color: white;
     border-color: var(--flutter-purple);
 }
 
 #downloadBtn:hover {
-    background: #7c3aed;
+    background: linear-gradient(135deg, #7c3aed 0%, var(--flutter-purple) 100%);
     border-color: #7c3aed;
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(137, 92, 245, 0.3);
+    box-shadow: 0 6px 20px rgba(137, 92, 245, 0.4);
 }
 
 #docsBtn {
-    background: var(--flutter-navy);
+    background: linear-gradient(135deg, var(--flutter-yellow) 0%, var(--flutter-red) 100%);
     color: white;
-    border-color: var(--flutter-navy);
+    border-color: var(--flutter-yellow);
 }
 
 #docsBtn:hover {
-    background: var(--dark-navy);
+    background: linear-gradient(135deg, var(--flutter-red) 0%, var(--flutter-yellow) 100%);
     color: white;
-    border-color: var(--dark-navy);
+    border-color: var(--flutter-red);
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(22, 33, 91, 0.3);
+    box-shadow: 0 6px 20px rgba(248, 205, 75, 0.4);
 }
 
 .code-block {
@@ -671,9 +685,9 @@ main {
 .quick-templates {
     margin: var(--space-xl) 0;
     padding: var(--space-2xl);
-    background: var(--bg-secondary);
+    background: linear-gradient(135deg, rgba(204, 229, 255, 0.15) 0%, rgba(137, 92, 245, 0.1) 100%);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--border-light);
+    border: 2px solid rgba(2, 133, 255, 0.2);
 }
 
 .quick-templates h4 {
@@ -702,16 +716,16 @@ main {
     font-weight: 600;
     transition: all var(--transition-base);
     text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     position: relative;
 }
 
 .template-btn:hover {
     color: white;
-    background: var(--flutter-blue);
+    background: linear-gradient(135deg, var(--flutter-blue) 0%, var(--flutter-purple) 100%);
     border-color: var(--flutter-blue);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(2, 133, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(2, 133, 255, 0.3);
 }
 
 .template-btn span {
@@ -721,14 +735,14 @@ main {
 
 .template-btn:active {
     transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(2, 133, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(2, 133, 255, 0.2);
 }
 
 .template-btn.selected {
-    background: var(--flutter-blue);
+    background: linear-gradient(135deg, var(--flutter-blue) 0%, var(--flutter-purple) 100%);
     color: white;
     border-color: var(--flutter-blue);
-    box-shadow: 0 4px 12px rgba(2, 133, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(2, 133, 255, 0.4);
 }
 
 /* Template tooltip */
@@ -2910,23 +2924,31 @@ textarea:focus {
         gap: var(--space-md);
     }
     
-    .header-logo img {
-        height: 40px;
+    .flutter-logo-text {
+        padding: var(--space-sm) var(--space-lg);
+    }
+    
+    .flutter-text {
+        font-size: 1.5rem;
     }
     
     .header-divider {
         width: 50px;
         height: 2px;
-        background: linear-gradient(90deg, transparent, var(--flutter-blue), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
     }
     
     header h1 {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
-    .header-logo img {
-        height: 35px;
+    .flutter-text {
+        font-size: 1.25rem;
+    }
+    
+    header h1 {
+        font-size: 1.25rem;
     }
 }

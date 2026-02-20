@@ -8,19 +8,21 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Flutter Terraform Generator</title>
-    <link rel="stylesheet" href="styles.css?v=8.1">
+    <link rel="stylesheet" href="styles.css?v=9.0">
 </head>
 
 <body>
     <div class="container">
         <header>
             <div class="header-logo">
-                <img src="/assets/flutter-logo.png" alt="Flutter Logo" onerror="this.style.display='none'" />
+                <div class="flutter-logo-text">
+                    <span class="flutter-text">FLUTTER</span>
+                </div>
                 <div class="header-divider"></div>
                 <h1>AI Terraform Generator</h1>
             </div>
             <p>Transform natural language into production-ready infrastructure code</p>
-            <p style="font-size: 0.9rem;">🤖 Powered by Advanced AI Pattern Recognition + Your AWS Account</p>
+            <p class="powered-by">🤖 Powered by Advanced AI Pattern Recognition + Your AWS Account</p>
             <div id="awsStatus" class="aws-status">
                 <span>🔄 Checking AWS connection...</span>
             </div>
@@ -121,7 +123,7 @@ Examples:
         </main>
     </div>
 
-    <script src="script.js?v=8.1"></script>
+    <script src="script.js?v=9.0"></script>
     <script>
         // Initialize AWS connection check on page load
         document.addEventListener('DOMContentLoaded', function () {
