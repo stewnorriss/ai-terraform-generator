@@ -16,12 +16,20 @@
     {
       "src": "script.js",
       "use": "@vercel/static"
+    },
+    {
+      "src": "flutter-cee-logo.png",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/server.js"
+    },
+    {
+      "src": "/flutter-cee-logo.png",
+      "dest": "/flutter-cee-logo.png"
     },
     {
       "src": "/styles.css",

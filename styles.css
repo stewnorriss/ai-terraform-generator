@@ -152,6 +152,32 @@ header {
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
 
+.flutter-cee-text {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-xs);
+    font-family: 'Clash Display', 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.flutter-text {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.02em;
+}
+
+.cee-text {
+    font-size: 1.5rem;
+    color: var(--flutter-blue);
+    background: linear-gradient(135deg, var(--flutter-blue), var(--sky-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(2, 133, 255, 0.3);
+}
+
 .header-divider {
     width: 2px;
     height: 50px;
