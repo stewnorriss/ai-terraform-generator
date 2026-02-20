@@ -139,6 +139,9 @@ header {
     padding: var(--space-md) var(--space-xl);
     border-radius: var(--radius-md);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-xs);
 }
 
 .flutter-text {
@@ -150,6 +153,19 @@ header {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.cee-text {
+    font-family: 'Clash Display', 'Poppins', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    background: linear-gradient(135deg, var(--flutter-blue) 0%, var(--flutter-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    top: -0.25rem;
 }
 
 .header-divider {
@@ -2932,6 +2948,10 @@ textarea:focus {
         font-size: 1.5rem;
     }
     
+    .cee-text {
+        font-size: 1.125rem;
+    }
+    
     .header-divider {
         width: 50px;
         height: 2px;
@@ -2946,6 +2966,10 @@ textarea:focus {
 @media (max-width: 480px) {
     .flutter-text {
         font-size: 1.25rem;
+    }
+    
+    .cee-text {
+        font-size: 1rem;
     }
     
     header h1 {
