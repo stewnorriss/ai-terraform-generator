@@ -8,7 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Flutter Terraform Generator</title>
-    <link rel="stylesheet" href="styles.css?v=25.0&t=1771594100">
+    <link rel="stylesheet" href="styles.css?v=26.0&t=1771594200">
     <meta name="cache-control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta name="expires" content="0">
     <meta name="pragma" content="no-cache">
@@ -94,7 +94,7 @@ Examples:
                     <div id="terraformCode" class="code-block"></div>
                     <div class="code-actions">
                         <button id="copyBtn" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
-                        <button id="downloadBtn" onclick="downloadTerraform()">💾 Download main.tf</button>
+                        <button id="downloadBtn" onclick="multiFileMode ? downloadAllFiles() : downloadTerraform()">💾 Download Files</button>
                         <button id="docsBtn" onclick="toggleDocumentation()">📚 Show Documentation</button>
                     </div>
                 </div>
@@ -127,7 +127,26 @@ Examples:
         </main>
     </div>
 
-    <script src="script.js?v=25.0&t=1771594100"></script></script>
+    <!-- Floating Toolbar -->
+    <div class="toolbar">
+        <button class="toolbar-btn shortcuts-btn" onclick="showKeyboardShortcuts()" title="Keyboard Shortcuts (Ctrl+?)">
+            ⌨️
+        </button>
+        <button class="toolbar-btn save-btn" onclick="saveProject()" title="Save Project (Ctrl+S)">
+            💾
+        </button>
+        <button class="toolbar-btn" onclick="showLoadProjectDialog()" title="Load Project (Ctrl+O)">
+            📂
+        </button>
+        <button class="toolbar-btn dark-mode-btn" onclick="toggleDarkMode()" title="Toggle Dark Mode (Ctrl+D)">
+            🌙
+        </button>
+        <button class="toolbar-btn" onclick="toggleMultiFileView()" title="Multi-File View (Ctrl+M)">
+            📄
+        </button>
+    </div>
+
+    <script src="script.js?v=26.0&t=1771594200"></script>
     <script>
         // Initialize AWS connection check on page load
         document.addEventListener('DOMContentLoaded', function () {

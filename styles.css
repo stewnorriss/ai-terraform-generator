@@ -2926,8 +2926,9 @@ dditional visual enhancements */
 ::-moz-selection {
     background: rgba(102, 126, 234, 0.2);
     color: #2d3748;
-}/
-* Focus states */
+}
+
+/* Focus states */
 button:focus,
 textarea:focus {
     outline: 2px solid var(--primary);
@@ -3019,5 +3020,555 @@ textarea:focus {
     
     header h1 {
         font-size: 1.25rem;
+    }
+}
+
+
+/* ============================================
+   DARK MODE STYLES
+   ============================================ */
+
+body.dark-mode {
+    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 50%, #0f1419 100%);
+    color: #e5e7eb;
+}
+
+body.dark-mode main {
+    background: rgba(26, 31, 46, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .input-label {
+    color: #e5e7eb;
+}
+
+body.dark-mode #naturalLanguageInput {
+    background: rgba(15, 20, 25, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e5e7eb;
+}
+
+body.dark-mode #naturalLanguageInput::placeholder {
+    color: #6b7280;
+}
+
+body.dark-mode .explanation,
+body.dark-mode .terraform-code {
+    background: rgba(15, 20, 25, 0.9);
+    border-color: rgba(2, 133, 255, 0.3);
+}
+
+body.dark-mode .explanation h3,
+body.dark-mode .terraform-code h3 {
+    color: #e5e7eb;
+}
+
+body.dark-mode #explanation {
+    color: #d1d5db;
+}
+
+body.dark-mode .quick-templates {
+    background: linear-gradient(135deg, rgba(2, 133, 255, 0.1) 0%, rgba(137, 92, 245, 0.1) 100%);
+    border-color: rgba(2, 133, 255, 0.3);
+}
+
+body.dark-mode .quick-templates h4 {
+    color: #e5e7eb;
+}
+
+body.dark-mode .template-btn {
+    background: rgba(15, 20, 25, 0.8);
+    color: #e5e7eb;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .docs-container {
+    background: rgba(15, 20, 25, 0.95);
+    border-color: rgba(2, 133, 255, 0.3);
+}
+
+body.dark-mode .docs-overview,
+body.dark-mode .docs-deployment,
+body.dark-mode .docs-best-practices {
+    background: rgba(2, 133, 255, 0.05);
+    border-color: rgba(2, 133, 255, 0.3);
+}
+
+body.dark-mode .docs-resource {
+    background: rgba(15, 20, 25, 0.8);
+    border-color: rgba(2, 133, 255, 0.2);
+}
+
+body.dark-mode .step {
+    background: rgba(15, 20, 25, 0.8);
+    border-color: rgba(97, 210, 126, 0.3);
+}
+
+/* ============================================
+   PROJECT MODAL STYLES
+   ============================================ */
+
+.project-modal,
+.shortcuts-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.project-modal-content,
+.shortcuts-modal-content {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+}
+
+body.dark-mode .project-modal-content,
+body.dark-mode .shortcuts-modal-content {
+    background: rgba(26, 31, 46, 0.98);
+    border: 2px solid rgba(2, 133, 255, 0.3);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-modal-header,
+.shortcuts-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 2px solid var(--border-light);
+}
+
+body.dark-mode .project-modal-header,
+body.dark-mode .shortcuts-modal-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.project-modal-header h3,
+.shortcuts-modal-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--flutter-navy);
+}
+
+body.dark-mode .project-modal-header h3,
+body.dark-mode .shortcuts-modal-header h3 {
+    color: #e5e7eb;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+}
+
+.project-list {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+body.dark-mode .project-item {
+    background: rgba(15, 20, 25, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.project-item:hover {
+    border-color: var(--flutter-blue);
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(2, 133, 255, 0.2);
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-info h4 {
+    margin: 0 0 var(--space-xs) 0;
+    color: var(--flutter-navy);
+    font-size: 1.125rem;
+}
+
+body.dark-mode .project-info h4 {
+    color: #e5e7eb;
+}
+
+.project-date {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin: 0 0 var(--space-xs) 0;
+}
+
+.project-preview {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+body.dark-mode .project-preview {
+    color: #9ca3af;
+}
+
+.project-delete {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+}
+
+.project-delete:hover {
+    background: rgba(239, 68, 68, 0.1);
+    transform: scale(1.1);
+}
+
+/* ============================================
+   MULTI-FILE TAB STYLES
+   ============================================ */
+
+.multi-file-tabs {
+    display: flex;
+    gap: 0;
+    background: linear-gradient(135deg, #21262d 0%, #30363d 100%);
+    border-bottom: 1px solid #30363d;
+    padding: 0;
+    overflow-x: auto;
+}
+
+.file-tab {
+    background: transparent;
+    border: none;
+    color: #8b949e;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+}
+
+.file-tab:hover {
+    color: #f0f6fc;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.file-tab.active {
+    color: #79c0ff;
+    border-bottom-color: #79c0ff;
+    background: rgba(121, 192, 255, 0.1);
+}
+
+.file-content {
+    display: none;
+}
+
+.file-content.active {
+    display: block;
+}
+
+/* ============================================
+   KEYBOARD SHORTCUTS MODAL
+   ============================================ */
+
+.shortcuts-list {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+}
+
+body.dark-mode .shortcut-item {
+    background: rgba(15, 20, 25, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.shortcut-item kbd {
+    background: linear-gradient(135deg, var(--flutter-blue), var(--flutter-purple));
+    color: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.shortcut-item span {
+    flex: 1;
+    color: var(--text-secondary);
+}
+
+body.dark-mode .shortcut-item span {
+    color: #d1d5db;
+}
+
+.shortcuts-note {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    background: rgba(248, 205, 75, 0.1);
+    border-left: 4px solid var(--flutter-yellow);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+body.dark-mode .shortcuts-note {
+    background: rgba(248, 205, 75, 0.05);
+    color: #d1d5db;
+}
+
+/* ============================================
+   TOOLBAR STYLES
+   ============================================ */
+
+.toolbar {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    z-index: 1000;
+}
+
+.toolbar-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, var(--flutter-blue), var(--flutter-purple));
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(2, 133, 255, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 24px rgba(2, 133, 255, 0.6);
+}
+
+.toolbar-btn:active {
+    transform: scale(0.95);
+}
+
+.toolbar-btn.dark-mode-btn {
+    background: linear-gradient(135deg, #1f2937, #374151);
+}
+
+.toolbar-btn.save-btn {
+    background: linear-gradient(135deg, var(--flutter-green), #059669);
+}
+
+.toolbar-btn.shortcuts-btn {
+    background: linear-gradient(135deg, var(--flutter-yellow), var(--flutter-red));
+}
+
+/* ============================================
+   NOTIFICATION STYLES (Enhanced)
+   ============================================ */
+
+.notification {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: white;
+    padding: var(--space-lg) var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    z-index: 10001;
+    animation: slideInRight 0.3s ease;
+    border-left: 4px solid;
+    max-width: 400px;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.notification-success {
+    border-left-color: var(--flutter-green);
+    background: linear-gradient(135deg, rgba(97, 210, 126, 0.1), white);
+}
+
+.notification-error {
+    border-left-color: var(--flutter-red);
+    background: linear-gradient(135deg, rgba(213, 34, 93, 0.1), white);
+}
+
+.notification-warning {
+    border-left-color: var(--flutter-yellow);
+    background: linear-gradient(135deg, rgba(248, 205, 75, 0.1), white);
+}
+
+.notification-info {
+    border-left-color: var(--flutter-blue);
+    background: linear-gradient(135deg, rgba(2, 133, 255, 0.1), white);
+}
+
+body.dark-mode .notification {
+    background: rgba(26, 31, 46, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notification-message {
+    flex: 1;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+body.dark-mode .notification-message {
+    color: #e5e7eb;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.notification-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
+}
+
+/* ============================================
+   RESPONSIVE IMPROVEMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .output-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .toolbar {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .toolbar-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.25rem;
+    }
+    
+    .notification {
+        top: 20px;
+        right: 20px;
+        left: 20px;
+        max-width: none;
+    }
+    
+    .project-modal-content,
+    .shortcuts-modal-content {
+        width: 95%;
+        padding: var(--space-lg);
+    }
+    
+    .multi-file-tabs {
+        overflow-x: auto;
+    }
+    
+    .file-tab {
+        padding: 10px 16px;
+        font-size: 0.8125rem;
     }
 }

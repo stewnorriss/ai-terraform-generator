@@ -2727,10 +2727,36 @@ function showTooltip(element, text) {
     }, 3000);
 }
 
-// Allow Enter key to trigger generation
-document.getElementById('naturalLanguageInput').addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' && event.ctrlKey) {
+// Keyboard shortcuts
+document.addEventListener('keydown', function(event) {
+    // Ctrl+Enter or Cmd+Enter to generate
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+        event.preventDefault();
         generateTerraform();
+    }
+    
+    // Ctrl+S or Cmd+S to save project
+    if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+        event.preventDefault();
+        saveProject();
+    }
+    
+    // Ctrl+O or Cmd+O to load project
+    if ((event.ctrlKey || event.metaKey) && event.key === 'o') {
+        event.preventDefault();
+        showLoadProjectDialog();
+    }
+    
+    // Ctrl+D or Cmd+D to toggle dark mode
+    if ((event.ctrlKey || event.metaKey) && event.key === 'd') {
+        event.preventDefault();
+        toggleDarkMode();
+    }
+    
+    // Ctrl+M or Cmd+M to toggle multi-file view
+    if ((event.ctrlKey || event.metaKey) && event.key === 'm') {
+        event.preventDefault();
+        toggleMultiFileView();
     }
 });
 
@@ -3151,4 +3177,330 @@ For issues or questions, visit: https://terraform-generator.vercel.app
             }
         }, index * 1000); // 1 second delay between downloads
     });
+}
+
+
+// ============================================
+// PROJECT SAVE/LOAD FUNCTIONALITY
+// ============================================
+
+function saveProject() {
+    const input = document.getElementById('naturalLanguageInput').value;
+    const terraformCode = document.getElementById('terraformCodeContent')?.textContent;
+    const explanation = document.getElementById('explanation')?.innerHTML;
+    
+    if (!input && !terraformCode) {
+        showNotification('Nothing to save', 'warning');
+        return;
+    }
+    
+    const projectName = prompt('Enter a name for this project:', `Project ${new Date().toLocaleDateString()}`);
+    if (!projectName) return;
+    
+    const project = {
+        name: projectName,
+        input: input,
+        terraform: terraformCode,
+        explanation: explanation,
+        timestamp: new Date().toISOString(),
+        region: awsRegion,
+        accountId: awsAccountId
+    };
+    
+    // Get existing projects
+    const projects = JSON.parse(localStorage.getItem('terraformProjects') || '[]');
+    
+    // Check if project with same name exists
+    const existingIndex = projects.findIndex(p => p.name === projectName);
+    if (existingIndex >= 0) {
+        if (!confirm('A project with this name already exists. Overwrite?')) {
+            return;
+        }
+        projects[existingIndex] = project;
+    } else {
+        projects.push(project);
+    }
+    
+    localStorage.setItem('terraformProjects', JSON.stringify(projects));
+    showNotification(`Project "${projectName}" saved successfully!`, 'success');
+}
+
+function showLoadProjectDialog() {
+    const projects = JSON.parse(localStorage.getItem('terraformProjects') || '[]');
+    
+    if (projects.length === 0) {
+        showNotification('No saved projects found', 'info');
+        return;
+    }
+    
+    // Create modal
+    const modal = document.createElement('div');
+    modal.className = 'project-modal';
+    modal.innerHTML = `
+        <div class="project-modal-content">
+            <div class="project-modal-header">
+                <h3>📂 Load Project</h3>
+                <button class="modal-close" onclick="this.closest('.project-modal').remove()">×</button>
+            </div>
+            <div class="project-list">
+                ${projects.map((project, index) => `
+                    <div class="project-item" onclick="loadProject(${index})">
+                        <div class="project-info">
+                            <h4>${project.name}</h4>
+                            <p class="project-date">${new Date(project.timestamp).toLocaleString()}</p>
+                            <p class="project-preview">${project.input.substring(0, 100)}...</p>
+                        </div>
+                        <button class="project-delete" onclick="event.stopPropagation(); deleteProject(${index})">🗑️</button>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+function loadProject(index) {
+    const projects = JSON.parse(localStorage.getItem('terraformProjects') || '[]');
+    const project = projects[index];
+    
+    if (!project) {
+        showNotification('Project not found', 'error');
+        return;
+    }
+    
+    // Load project data
+    document.getElementById('naturalLanguageInput').value = project.input;
+    
+    if (project.terraform) {
+        displayTerraformCode(project.terraform);
+        document.getElementById('explanation').innerHTML = project.explanation;
+        document.getElementById('outputSection').style.display = 'block';
+    }
+    
+    // Close modal
+    document.querySelector('.project-modal')?.remove();
+    
+    showNotification(`Project "${project.name}" loaded successfully!`, 'success');
+}
+
+function deleteProject(index) {
+    if (!confirm('Are you sure you want to delete this project?')) {
+        return;
+    }
+    
+    const projects = JSON.parse(localStorage.getItem('terraformProjects') || '[]');
+    const projectName = projects[index].name;
+    projects.splice(index, 1);
+    localStorage.setItem('terraformProjects', JSON.stringify(projects));
+    
+    showNotification(`Project "${projectName}" deleted`, 'success');
+    
+    // Refresh the dialog
+    document.querySelector('.project-modal')?.remove();
+    if (projects.length > 0) {
+        showLoadProjectDialog();
+    }
+}
+
+// ============================================
+// DARK MODE FUNCTIONALITY
+// ============================================
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    showNotification(`Dark mode ${isDark ? 'enabled' : 'disabled'}`, 'info');
+}
+
+// Initialize dark mode from localStorage
+if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+}
+
+// ============================================
+// MULTI-FILE GENERATION
+// ============================================
+
+let multiFileMode = false;
+
+function toggleMultiFileView() {
+    multiFileMode = !multiFileMode;
+    showNotification(`Multi-file mode ${multiFileMode ? 'enabled' : 'disabled'}`, 'info');
+    
+    // If we have terraform code, regenerate with multi-file structure
+    const terraformCode = document.getElementById('terraformCodeContent')?.textContent;
+    if (terraformCode && multiFileMode) {
+        generateMultiFileStructure(terraformCode);
+    }
+}
+
+function generateMultiFileStructure(mainTfCode) {
+    // Extract provider configuration
+    const providerMatch = mainTfCode.match(/terraform\s*{[\s\S]*?}\s*provider\s*"aws"\s*{[\s\S]*?}/);
+    const providerCode = providerMatch ? providerMatch[0] : '';
+    
+    // Extract variables (if any)
+    const variableMatches = mainTfCode.match(/variable\s+"[^"]+"\s*{[\s\S]*?}/g) || [];
+    const variablesCode = variableMatches.join('\n\n');
+    
+    // Extract outputs (if any)
+    const outputMatches = mainTfCode.match(/output\s+"[^"]+"\s*{[\s\S]*?}/g) || [];
+    const outputsCode = outputMatches.join('\n\n');
+    
+    // Main resources (everything else)
+    let resourcesCode = mainTfCode;
+    if (providerCode) {
+        resourcesCode = resourcesCode.replace(providerCode, '').trim();
+    }
+    
+    // Create multi-file view
+    const codeContainer = document.getElementById('terraformCode');
+    codeContainer.innerHTML = `
+        <div class="multi-file-tabs">
+            <button class="file-tab active" onclick="switchFileTab('main')">main.tf</button>
+            <button class="file-tab" onclick="switchFileTab('providers')">providers.tf</button>
+            <button class="file-tab" onclick="switchFileTab('variables')">variables.tf</button>
+            <button class="file-tab" onclick="switchFileTab('outputs')">outputs.tf</button>
+        </div>
+        <div class="file-content active" data-file="main">
+            <div class="code-header">
+                <div class="code-title"><span>main.tf</span></div>
+                <div class="code-lang">Terraform HCL</div>
+            </div>
+            <div class="code-content">
+                <pre><code>${highlightTerraformCode(resourcesCode)}</code></pre>
+            </div>
+        </div>
+        <div class="file-content" data-file="providers">
+            <div class="code-header">
+                <div class="code-title"><span>providers.tf</span></div>
+                <div class="code-lang">Terraform HCL</div>
+            </div>
+            <div class="code-content">
+                <pre><code>${highlightTerraformCode(providerCode)}</code></pre>
+            </div>
+        </div>
+        <div class="file-content" data-file="variables">
+            <div class="code-header">
+                <div class="code-title"><span>variables.tf</span></div>
+                <div class="code-lang">Terraform HCL</div>
+            </div>
+            <div class="code-content">
+                <pre><code>${variablesCode ? highlightTerraformCode(variablesCode) : '# No variables defined yet\n# Add variables here for reusable configuration'}</code></pre>
+            </div>
+        </div>
+        <div class="file-content" data-file="outputs">
+            <div class="code-header">
+                <div class="code-title"><span>outputs.tf</span></div>
+                <div class="code-lang">Terraform HCL</div>
+            </div>
+            <div class="code-content">
+                <pre><code>${outputsCode ? highlightTerraformCode(outputsCode) : '# No outputs defined yet\n# Add outputs here to expose resource attributes'}</code></pre>
+            </div>
+        </div>
+    `;
+}
+
+function switchFileTab(fileName) {
+    // Update tabs
+    document.querySelectorAll('.file-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Update content
+    document.querySelectorAll('.file-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.querySelector(`.file-content[data-file="${fileName}"]`).classList.add('active');
+}
+
+function highlightTerraformCode(code) {
+    const lines = code.split('\n');
+    let highlightedCode = '';
+    
+    lines.forEach((line, index) => {
+        const lineNumber = index + 1;
+        const highlightedLine = highlightTerraformSyntax(line);
+        highlightedCode += `<span class="code-line" data-line="${lineNumber}">${highlightedLine}</span>\n`;
+    });
+    
+    return highlightedCode;
+}
+
+// ============================================
+// ENHANCED DOWNLOAD WITH MULTI-FILE SUPPORT
+// ============================================
+
+function downloadAllFiles() {
+    if (!multiFileMode) {
+        downloadTerraform();
+        return;
+    }
+    
+    // Download all files
+    const files = ['main', 'providers', 'variables', 'outputs'];
+    files.forEach((fileName, index) => {
+        setTimeout(() => {
+            const content = document.querySelector(`.file-content[data-file="${fileName}"] code`)?.textContent;
+            if (content && content.trim() && !content.startsWith('# No')) {
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${fileName}.tf`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+        }, index * 500);
+    });
+    
+    showNotification('Downloading all Terraform files...', 'success');
+}
+
+// ============================================
+// KEYBOARD SHORTCUTS HELP
+// ============================================
+
+function showKeyboardShortcuts() {
+    const modal = document.createElement('div');
+    modal.className = 'shortcuts-modal';
+    modal.innerHTML = `
+        <div class="shortcuts-modal-content">
+            <div class="shortcuts-modal-header">
+                <h3>⌨️ Keyboard Shortcuts</h3>
+                <button class="modal-close" onclick="this.closest('.shortcuts-modal').remove()">×</button>
+            </div>
+            <div class="shortcuts-list">
+                <div class="shortcut-item">
+                    <kbd>Ctrl</kbd> + <kbd>Enter</kbd>
+                    <span>Generate Terraform code</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>Ctrl</kbd> + <kbd>S</kbd>
+                    <span>Save current project</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>Ctrl</kbd> + <kbd>O</kbd>
+                    <span>Open saved project</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>Ctrl</kbd> + <kbd>D</kbd>
+                    <span>Toggle dark mode</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>Ctrl</kbd> + <kbd>M</kbd>
+                    <span>Toggle multi-file view</span>
+                </div>
+            </div>
+            <p class="shortcuts-note">💡 Use <kbd>Cmd</kbd> instead of <kbd>Ctrl</kbd> on Mac</p>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
 }
