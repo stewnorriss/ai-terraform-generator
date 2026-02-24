@@ -3572,3 +3572,792 @@ body.dark-mode .notification-message {
         font-size: 0.8125rem;
     }
 }
+
+
+/* ============================================
+   ENHANCED ARCHITECTURE DIAGRAM STYLES
+   ============================================ */
+
+.diagram-container {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
+    margin: var(--space-xl) 0;
+}
+
+body.dark-mode .diagram-container {
+    background: linear-gradient(135deg, rgba(15, 20, 25, 0.8) 0%, rgba(26, 31, 46, 0.8) 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.internet-layer {
+    background: linear-gradient(135deg, rgba(2, 133, 255, 0.05) 0%, rgba(137, 92, 245, 0.05) 100%);
+    border: 2px dashed var(--flutter-blue);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+.global-internet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.user-traffic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+}
+
+.component {
+    background: white;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+body.dark-mode .component {
+    background: rgba(26, 31, 46, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.component:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(2, 133, 255, 0.2);
+    border-color: var(--flutter-blue);
+}
+
+.component-icon {
+    font-size: 2rem;
+    display: block;
+    text-align: center;
+    margin-bottom: var(--space-sm);
+}
+
+.component-name {
+    display: block;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--flutter-navy);
+    text-align: center;
+    margin-bottom: var(--space-xs);
+}
+
+body.dark-mode .component-name {
+    color: #e5e7eb;
+}
+
+.component-desc {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+body.dark-mode .component-desc {
+    color: #9ca3af;
+}
+
+.component-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-light);
+}
+
+body.dark-mode .component-details {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.detail-item {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+body.dark-mode .detail-item {
+    background: rgba(15, 20, 25, 0.6);
+    color: #d1d5db;
+}
+
+.detail-item::before {
+    content: '•';
+    color: var(--flutter-blue);
+    font-weight: bold;
+}
+
+.component-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    background: linear-gradient(135deg, rgba(97, 210, 126, 0.05) 0%, rgba(2, 133, 255, 0.05) 100%);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--flutter-green);
+}
+
+.metric-item {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+body.dark-mode .metric-item {
+    color: #d1d5db;
+}
+
+.component-networking {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    background: linear-gradient(135deg, rgba(2, 133, 255, 0.05) 0%, rgba(137, 92, 245, 0.05) 100%);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--flutter-blue);
+}
+
+.network-item {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+body.dark-mode .network-item {
+    color: #d1d5db;
+}
+
+.flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm);
+    position: relative;
+}
+
+.flow-arrow.horizontal {
+    width: 60px;
+    height: 40px;
+}
+
+.flow-arrow.horizontal::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--flutter-blue), var(--flutter-purple));
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.flow-arrow.horizontal::after {
+    content: '▶';
+    position: absolute;
+    right: -5px;
+    color: var(--flutter-purple);
+    font-size: 1.25rem;
+}
+
+.flow-arrow.vertical-down {
+    width: 40px;
+    height: 60px;
+    flex-direction: column;
+}
+
+.flow-arrow.vertical-down::before {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--flutter-blue), var(--flutter-purple));
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.flow-arrow.vertical-down::after {
+    content: '▼';
+    position: absolute;
+    bottom: -5px;
+    color: var(--flutter-purple);
+    font-size: 1.25rem;
+}
+
+.flow-label {
+    position: absolute;
+    background: white;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--flutter-navy);
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+body.dark-mode .flow-label {
+    background: rgba(26, 31, 46, 0.95);
+    color: #e5e7eb;
+}
+
+.aws-cloud {
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.05) 0%, rgba(255, 153, 0, 0.02) 100%);
+    border: 3px solid #FF9900;
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    margin-top: var(--space-xl);
+    position: relative;
+}
+
+.cloud-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md);
+    background: linear-gradient(135deg, #FF9900, #FF6600);
+    border-radius: var(--radius-lg);
+    color: white;
+}
+
+.cloud-icon {
+    font-size: 2rem;
+}
+
+.cloud-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.cloud-region {
+    margin-left: auto;
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.vpc-container {
+    background: linear-gradient(135deg, rgba(22, 33, 91, 0.05) 0%, rgba(2, 133, 255, 0.05) 100%);
+    border: 2px solid var(--flutter-navy);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    position: relative;
+}
+
+.vpc-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md);
+    background: var(--flutter-navy);
+    border-radius: var(--radius-md);
+    color: white;
+}
+
+.vpc-icon {
+    font-size: 1.5rem;
+}
+
+.vpc-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.vpc-cidr {
+    margin-left: auto;
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.routing-section {
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-lg);
+}
+
+body.dark-mode .routing-section {
+    background: rgba(15, 20, 25, 0.3);
+}
+
+.route-tables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+}
+
+.route-table-comp {
+    padding: var(--space-lg);
+}
+
+.route-table-comp.public {
+    border-left: 4px solid var(--flutter-green);
+}
+
+.route-table-comp.private {
+    border-left: 4px solid var(--flutter-red);
+}
+
+.route-entries {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+}
+
+.route-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-sm);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+body.dark-mode .route-entry {
+    background: rgba(15, 20, 25, 0.6);
+}
+
+.route-dest {
+    color: var(--flutter-blue);
+    font-weight: 600;
+}
+
+.route-target {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+body.dark-mode .route-target {
+    color: #9ca3af;
+}
+
+.availability-zones {
+    margin-top: var(--space-xl);
+}
+
+.az-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.az-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--flutter-navy);
+    padding: var(--space-sm) var(--space-xl);
+    background: linear-gradient(135deg, rgba(2, 133, 255, 0.1), rgba(137, 92, 245, 0.1));
+    border-radius: var(--radius-lg);
+    display: inline-block;
+}
+
+body.dark-mode .az-title {
+    color: #e5e7eb;
+}
+
+.az-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+}
+
+.availability-zone {
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+}
+
+body.dark-mode .availability-zone {
+    background: rgba(15, 20, 25, 0.4);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.availability-zone.az-a {
+    border-top: 4px solid var(--flutter-blue);
+}
+
+.availability-zone.az-b {
+    border-top: 4px solid var(--flutter-purple);
+}
+
+.az-label {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--flutter-navy);
+    margin-bottom: var(--space-lg);
+    padding: var(--space-sm);
+    background: linear-gradient(135deg, var(--flutter-blue), var(--flutter-purple));
+    color: white;
+    border-radius: var(--radius-md);
+}
+
+.subnet {
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.subnet.public-subnet {
+    border: 2px solid var(--flutter-green);
+}
+
+.subnet.private-subnet {
+    border: 2px solid var(--flutter-red);
+}
+
+.subnet-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.subnet.public-subnet .subnet-header {
+    background: linear-gradient(135deg, rgba(97, 210, 126, 0.2), rgba(97, 210, 126, 0.1));
+    color: var(--flutter-green);
+}
+
+.subnet.private-subnet .subnet-header {
+    background: linear-gradient(135deg, rgba(213, 34, 93, 0.2), rgba(213, 34, 93, 0.1));
+    color: var(--flutter-red);
+}
+
+.subnet-icon {
+    font-size: 1.25rem;
+}
+
+.subnet-name {
+    flex: 1;
+}
+
+.subnet-cidr {
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--flutter-navy);
+}
+
+body.dark-mode .subnet-cidr {
+    background: rgba(26, 31, 46, 0.8);
+    color: #e5e7eb;
+}
+
+.subnet-content {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.external-services {
+    margin-top: var(--space-2xl);
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, rgba(248, 205, 75, 0.05) 0%, rgba(213, 34, 93, 0.05) 100%);
+    border: 2px dashed var(--flutter-yellow);
+    border-radius: var(--radius-lg);
+}
+
+.service-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.service-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--flutter-navy);
+    padding: var(--space-sm) var(--space-xl);
+    background: linear-gradient(135deg, rgba(248, 205, 75, 0.2), rgba(213, 34, 93, 0.2));
+    border-radius: var(--radius-lg);
+    display: inline-block;
+}
+
+body.dark-mode .service-title {
+    color: #e5e7eb;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+}
+
+.component.internet,
+.component.dns,
+.component.cloudfront,
+.component.user-component {
+    min-width: 200px;
+}
+
+.component.secondary {
+    opacity: 0.7;
+    border-style: dashed;
+}
+
+.igw-container {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.nat-gateway {
+    text-align: center;
+    margin-top: var(--space-lg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .az-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .route-tables {
+        grid-template-columns: 1fr;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-traffic {
+        flex-direction: column;
+    }
+    
+    .flow-arrow.horizontal {
+        transform: rotate(90deg);
+    }
+    
+    .diagram-container {
+        padding: var(--space-lg);
+    }
+}
+
+
+/* ============================================
+   DIAGRAM LEGEND STYLES
+   ============================================ */
+
+.diagram-legend {
+    background: linear-gradient(135deg, rgba(2, 133, 255, 0.05), rgba(137, 92, 245, 0.05));
+    border: 2px solid var(--flutter-blue);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+body.dark-mode .diagram-legend {
+    background: linear-gradient(135deg, rgba(2, 133, 255, 0.1), rgba(137, 92, 245, 0.1));
+    border-color: rgba(2, 133, 255, 0.3);
+}
+
+.diagram-legend h5 {
+    color: var(--flutter-navy);
+}
+
+body.dark-mode .diagram-legend h5 {
+    color: #e5e7eb;
+}
+
+.diagram-legend span {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .diagram-legend span {
+    color: #d1d5db;
+}
+
+/* ============================================
+   SPECIFIC COMPONENT STYLES
+   ============================================ */
+
+.component.api-gateway {
+    border-left: 4px solid var(--flutter-purple);
+}
+
+.component.dynamodb {
+    border-left: 4px solid var(--flutter-blue);
+}
+
+.component.elasticache {
+    border-left: 4px solid var(--flutter-red);
+}
+
+.component.sqs {
+    border-left: 4px solid var(--flutter-yellow);
+}
+
+.component.sns {
+    border-left: 4px solid var(--flutter-green);
+}
+
+.component.cloudwatch {
+    border-left: 4px solid #FF9900;
+}
+
+.component.systems-manager {
+    border-left: 4px solid #7C3AED;
+}
+
+.component.cloudtrail {
+    border-left: 4px solid #EC4899;
+}
+
+.component.iam {
+    border-left: 4px solid #10B981;
+}
+
+.component.s3 {
+    border-left: 4px solid #F59E0B;
+}
+
+.component.ec2 {
+    border-left: 4px solid var(--flutter-blue);
+}
+
+.component.rds {
+    border-left: 4px solid var(--flutter-navy);
+}
+
+.component.load-balancer {
+    border-left: 4px solid var(--flutter-green);
+}
+
+.component.lambda {
+    border-left: 4px solid #FF6600;
+}
+
+.component.internet {
+    border: 3px solid var(--flutter-blue);
+    background: linear-gradient(135deg, rgba(2, 133, 255, 0.1), rgba(137, 92, 245, 0.1));
+}
+
+.component.dns {
+    border: 2px solid var(--flutter-purple);
+}
+
+.component.cloudfront {
+    border: 2px solid #FF9900;
+}
+
+.component.user-component {
+    border: 3px solid var(--flutter-green);
+    background: linear-gradient(135deg, rgba(97, 210, 126, 0.1), rgba(2, 133, 255, 0.1));
+}
+
+.component.igw {
+    border: 2px solid var(--flutter-blue);
+    background: linear-gradient(135deg, rgba(2, 133, 255, 0.05), white);
+}
+
+.component.nat {
+    border: 2px solid var(--flutter-yellow);
+    background: linear-gradient(135deg, rgba(248, 205, 75, 0.05), white);
+}
+
+/* ============================================
+   ENHANCED COMPONENT INTERACTIONS
+   ============================================ */
+
+.component:hover .component-details {
+    background: linear-gradient(135deg, rgba(2, 133, 255, 0.05), rgba(137, 92, 245, 0.05));
+}
+
+.component:hover .component-metrics {
+    border-left-color: var(--flutter-blue);
+}
+
+.component:hover .component-networking {
+    border-left-color: var(--flutter-purple);
+}
+
+/* ============================================
+   DIAGRAM ANIMATIONS
+   ============================================ */
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.flow-arrow::before {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.component {
+    animation: slideIn 0.5s ease-out;
+}
+
+.component:nth-child(1) { animation-delay: 0.1s; }
+.component:nth-child(2) { animation-delay: 0.2s; }
+.component:nth-child(3) { animation-delay: 0.3s; }
+.component:nth-child(4) { animation-delay: 0.4s; }
+.component:nth-child(5) { animation-delay: 0.5s; }
+
+/* ============================================
+   PRINT STYLES FOR DIAGRAMS
+   ============================================ */
+
+@media print {
+    .diagram-container {
+        page-break-inside: avoid;
+        background: white !important;
+    }
+    
+    .component {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    .flow-arrow::before {
+        animation: none;
+    }
+}
